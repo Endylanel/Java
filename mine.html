@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Fan Page</title>
+</head>
+<body>
+    <script>
+        // Создаем заголовок
+        const header = document.createElement('h1');
+        header.textContent = "Minecraft Fan Page";
+        header.style.textAlign = "center";
+        header.style.color = "#2ecc71";
+
+        // Создаем описание
+        const description = document.createElement('p');
+        description.textContent = "Добро пожаловать на фан-сайт Minecraft! Здесь вы можете узнать больше об игре и добавить свои любимые элементы.";
+        description.style.textAlign = "center";
+        description.style.fontSize = "18px";
+
+        // Создаем контейнер для списка
+        const listContainer = document.createElement('div');
+        listContainer.style.margin = "20px auto";
+        listContainer.style.maxWidth = "400px";
+        listContainer.style.textAlign = "center";
+
+        const listTitle = document.createElement('h2');
+        listTitle.textContent = "Ваши любимые элементы Minecraft:";
+        listTitle.style.color = "#3498db";
+
+        const list = document.createElement('ul');
+        list.style.listStyleType = "none";
+        list.style.padding = "0";
+        list.style.fontSize = "16px";
+
+        // Создаем поле ввода и кнопку
+        const inputField = document.createElement('input');
+        inputField.type = "text";
+        inputField.placeholder = "Введите элемент...";
+        inputField.style.padding = "10px";
+        inputField.style.width = "calc(100% - 22px)";
+        inputField.style.marginBottom = "10px";
+        inputField.style.border = "1px solid #ccc";
+        inputField.style.borderRadius = "5px";
+
+        const addButton = document.createElement('button');
+        addButton.textContent = "Добавить";
+        addButton.style.padding = "10px";
+        addButton.style.backgroundColor = "#e67e22";
+        addButton.style.color = "white";
+        addButton.style.border = "none";
+        addButton.style.borderRadius = "5px";
+        addButton.style.cursor = "pointer";
+
+        // Добавляем обработчик для кнопки
+        addButton.addEventListener('click', () => {
+            const itemText = inputField.value.trim();
+            if (itemText) {
+                const listItem = document.createElement('li');
+                listItem.textContent = itemText;
+                listItem.style.margin = "5px 0";
+                listItem.style.padding = "5px";
+                listItem.style.backgroundColor = "#ecf0f1";
+                listItem.style.color = "#2c3e50";
+                listItem.style.borderRadius = "5px";
+                list.appendChild(listItem);
+                inputField.value = "";
+            }
+        });
+
+        // Собираем элементы на страницу
+        document.body.style.fontFamily = "Arial, sans-serif";
+        document.body.style.backgroundColor = "#2c3e50";
+        document.body.style.color = "#ecf0f1";
+        document.body.style.margin = "0";
+        document.body.style.padding = "20px";
+
+        document.body.appendChild(header);
+        document.body.appendChild(description);
+        listContainer.appendChild(listTitle);
+        listContainer.appendChild(list);
+        listContainer.appendChild(inputField);
+        listContainer.appendChild(addButton);
+        document.body.appendChild(listContainer);
+    </script>
+</body>
+</html>
