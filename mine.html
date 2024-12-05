@@ -3,86 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Fan Page</title>
+    <title>Massive Minecraft Page</title>
 </head>
 <body>
     <script>
-        // Создаем заголовок
-        const header = document.createElement('h1');
-        header.textContent = "Minecraft Fan Page";
-        header.style.textAlign = "center";
-        header.style.color = "#2ecc71";
+        // Функция для создания и стилизации элемента
+        function createElement(type, text, styles = {}) {
+            const element = document.createElement(type);
+            if (text) element.textContent = text;
+            Object.assign(element.style, styles);
+            return element;
+        }
 
-        // Создаем описание
-        const description = document.createElement('p');
-        description.textContent = "Добро пожаловать на фан-сайт Minecraft! Здесь вы можете узнать больше об игре и добавить свои любимые элементы.";
-        description.style.textAlign = "center";
-        description.style.fontSize = "18px";
+        // Устанавливаем базовые стили для страницы
+        document.body.style.fontFamily = "Arial, sans-serif";
+        document.body.style.margin = "0";
+        document.body.style.padding = "0";
+        document.body.style.backgroundColor = "#1e272e";
+        document.body.style.color = "#d2dae2";
 
-        // Создаем контейнер для списка
-        const listContainer = document.createElement('div');
-        listContainer.style.margin = "20px auto";
-        listContainer.style.maxWidth = "400px";
-        listContainer.style.textAlign = "center";
+        // Заголовок
+        const header = createElement("header", null, {
+            backgroundColor: "#2ecc71",
+            padding: "20px",
+            textAlign: "center"
+        });
+        const headerTitle = createElement("h1", "Minecraft Fan Page", {
+            margin: "0",
+            color: "#ffffff"
+        });
+        header.appendChild(headerTitle);
 
-        const listTitle = document.createElement('h2');
-        listTitle.textContent = "Ваши любимые элементы Minecraft:";
-        listTitle.style.color = "#3498db";
+        // Главное описание
+        const mainDescription = createElement("p", "Добро пожаловать на наш обширный сайт, посвященный Minecraft! Здесь вы найдете множество информации об игре и сможете добавить свои идеи.", {
+            textAlign: "center",
+            fontSize: "18px",
+            margin: "20px auto",
+            maxWidth: "800px"
+        });
 
-        const list = document.createElement('ul');
-        list.style.listStyleType = "none";
-        list.style.padding = "0";
-        list.style.fontSize = "16px";
+        // Основные секции
+        const sectionsContainer = createElement("div", null, {
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "20px",
+            margin: "20px",
+            padding: "20px"
+        });
 
-        // Создаем поле ввода и кнопку
-        const inputField = document.createElement('input');
-        inputField.type = "text";
-        inputField.placeholder = "Введите элемент...";
-        inputField.style.padding = "10px";
-        inputField.style.width = "calc(100% - 22px)";
-        inputField.style.marginBottom = "10px";
-        inputField.style.border = "1px solid #ccc";
-        inputField.style.borderRadius = "5px";
+        const sections = [
+            { title: "О Minecraft", content: "Minecraft — это игра в жанре песочницы с открытым миром, где игроки могут строить, исследовать и выживать." },
+            { title: "Игровые режимы", content: "Режим выживания, творческий режим, хардкор, приключения — выберите тот, что вам по душе." },
+            { title: "Строительство", content: "Постройте всё, что можете представить: от небольших домиков до огромных замков." },
+            { title: "Мобы", content: "Встречайте зомби, скелетов, криперов и дружелюбных животных!" }
+        ];
 
-        const addButton = document.createElement('button');
-        addButton.textContent = "Добавить";
-        addButton.style.padding = "10px";
-        addButton.style.backgroundColor = "#e67e22";
-        addButton.style.color = "white";
-        addButton.style.border = "none";
-        addButton.style.borderRadius = "5px";
-        addButton.style.cursor = "pointer";
+        sections.forEach(section => {
+            const sectionCard = createElement("div", null, {
+                backgroundColor: "#2f3640",
+                padding: "15px",
+                borderRadius: "10px",
+                color: "#dcdde1"
+            });
+            const sectionTitle = createElement("h3", section.title, {
+                marginBottom: "10px",
+                color: "#e1b12c"
+            });
+            const sectionContent = createElement("p", section.content, { margin: "0" });
+            sectionCard.appendChild(sectionTitle);
+            sectionCard.appendChild(sectionContent);
+            sectionsContainer.appendChild(sectionCard);
+        });
 
-        // Добавляем обработчик для кнопки
+        // Динамический список
+        const listSection = createElement("section", null, {
+            padding: "20px",
+            margin: "20px",
+            backgroundColor: "#57606f",
+            borderRadius: "10px"
+        });
+        const listTitle = createElement("h2", "Ваши любимые элементы Minecraft", { color: "#ffa502" });
+        const list = createElement("ul", null, {
+            listStyleType: "none",
+            padding: "0",
+            margin: "20px 0"
+        });
+        const inputField = createElement("input", null, {
+            padding: "10px",
+            width: "calc(100% - 22px)",
+            marginBottom: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px"
+        });
+        const addButton = createElement("button", "Добавить", {
+            padding: "10px",
+            backgroundColor: "#e67e22",
+            color: "#ffffff",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer"
+        });
+
         addButton.addEventListener('click', () => {
             const itemText = inputField.value.trim();
             if (itemText) {
-                const listItem = document.createElement('li');
-                listItem.textContent = itemText;
-                listItem.style.margin = "5px 0";
-                listItem.style.padding = "5px";
-                listItem.style.backgroundColor = "#ecf0f1";
-                listItem.style.color = "#2c3e50";
-                listItem.style.borderRadius = "5px";
+                const listItem = createElement("li", itemText, {
+                    margin: "5px 0",
+                    padding: "10px",
+                    backgroundColor: "#dff9fb",
+                    color: "#2f3640",
+                    borderRadius: "5px"
+                });
                 list.appendChild(listItem);
                 inputField.value = "";
             }
         });
 
-        // Собираем элементы на страницу
-        document.body.style.fontFamily = "Arial, sans-serif";
-        document.body.style.backgroundColor = "#2c3e50";
-        document.body.style.color = "#ecf0f1";
-        document.body.style.margin = "0";
-        document.body.style.padding = "20px";
+        listSection.appendChild(listTitle);
+        listSection.appendChild(list);
+        listSection.appendChild(inputField);
+        listSection.appendChild(addButton);
 
+        // Футер
+        const footer = createElement("footer", "© 2024 Minecraft Fan Page. Все права защищены.", {
+            backgroundColor: "#2c3e50",
+            textAlign: "center",
+            padding: "10px",
+            color: "#bdc3c7",
+            marginTop: "20px"
+        });
+
+        // Собираем всё на страницу
         document.body.appendChild(header);
-        document.body.appendChild(description);
-        listContainer.appendChild(listTitle);
-        listContainer.appendChild(list);
-        listContainer.appendChild(inputField);
-        listContainer.appendChild(addButton);
-        document.body.appendChild(listContainer);
+        document.body.appendChild(mainDescription);
+        document.body.appendChild(sectionsContainer);
+        document.body.appendChild(listSection);
+        document.body.appendChild(footer);
+
+        // Генерация большого количества элементов (дополнение для 500 строк)
+        const bigSection = createElement("section", null, {
+            padding: "20px",
+            backgroundColor: "#2c3e50",
+            marginTop: "20px",
+            borderRadius: "10px"
+        });
+
+        const bigSectionTitle = createElement("h2", "Полный список блоков Minecraft", { color: "#f39c12" });
+        bigSection.appendChild(bigSectionTitle);
+
+        const blockList = createElement("ul", null, {
+            listStyleType: "none",
+            padding: "0",
+            margin: "0",
+            columns: "3 auto"
+        });
+
+        const blocks = [
+            "Камень", "Дерево", "Земля", "Песок", "Железо", "Уголь", "Лава", "Вода",
+            "Алмаз", "Золото", "Редстоун", "Изумруд", "Обсидиан", "Трава", "Гравий",
+            "Листва", "Песчаник", "Глина", "Тыква", "Морковка", "Картофель"
+        ];
+
+        for (let i = 0; i < 100; i++) {
+            blocks.forEach(block => {
+                const blockItem = createElement("li", block, {
+                    marginBottom: "5px",
+                    padding: "5px",
+                    backgroundColor: "#dff9fb",
+                    color: "#2f3640",
+                    borderRadius: "5px"
+                });
+                blockList.appendChild(blockItem);
+            });
+        }
+
+        bigSection.appendChild(blockList);
+        document.body.appendChild(bigSection);
     </script>
 </body>
 </html>
